@@ -2,10 +2,13 @@
  *  Compilation:  javac R00_Ids03_J.java
  *  Execution:    java R00_Ids03_J
  *
- *  This is code currently non-compliant
+ *  This code is compliant
+ *
+ *  This code uses the santitizeInput function to santitize the username before logging
  *
  ******************************************************************************/
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class R00_Ids03_J {
 
@@ -19,9 +22,9 @@ public class R00_Ids03_J {
            Boolean loginSuccessful = true;
 
            if (loginSuccessful) {
-                logger.severe("User login succeeded for: " + username);
+                logger.severe("User login succeeded for: " + sanitizeInput(username));
            } else {
-                logger.severe("User login failed for: " + username);
+                logger.severe("User login failed for: " + sanitizeInput(username));
            }
       }
 
@@ -33,5 +36,11 @@ public class R00_Ids03_J {
       * Rule 00-Ids03
       */
 
-
+      public static String sanitizeInput(String input) {
+           if (Pattern.matches("[A-Za-z0-9_]+", input)) {
+                return input;
+           } else {
+                return "unauthorized user";
+           }
+      }
 }
