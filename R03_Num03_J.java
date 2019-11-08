@@ -2,7 +2,9 @@
  *  Compilation:  javac R03_Num03_J.java
  *  Execution:    java R03_Num03_J
  *
- *  This code is non-compliant
+ *  This code is compliant
+ *
+ *  This code returns the read integer with a 32 bit mask, ensuring any integer is in the byte range of an unsigned int
  *
  ******************************************************************************/
 import java.io.DataInputStream;
@@ -12,11 +14,11 @@ import java.io.InputStream;
 public class R03_Num03_J {
 
      public static void main(String[] args) {
-          int anInt;
+          long aLong;
           InputStream is = null;
           DataInputStream dis = new DataInputStream(is);
           try {
-               anInt = getInteger(dis);
+               aLong = getInteger(dis);
           } catch(IOException e) {
 
           } catch(NullPointerException ne) {
@@ -33,8 +35,8 @@ public class R03_Num03_J {
      * Rule R03_Num03
      */
 
-     public static int getInteger(DataInputStream is) throws IOException {
-          return is.readInt();
+     public static long getInteger(DataInputStream is) throws IOException {
+          return is.readInt() & 0xFFFFFFFFL;
      }
 
 }
